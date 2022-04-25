@@ -1,31 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Menu from './Menu';
+import Users from './Users';
 
-const App = () => {
-  return (
+const Tareas = () => <div>Tareas</div>;
+
+const App = () => (
+  <BrowserRouter>
+    <Menu />
     <div className='margen'>
-      <table className='tabla'>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Enlace</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Gerardo</td>
-            <td>gerardo@garavito.com</td>
-            <td>gerardo.com</td>
-          </tr>
-          <tr>
-            <td>Platzi</td>
-            <td>platzi@garavito.com</td>
-            <td>platzi.com</td>
-          </tr>
-        </tbody>
-      </table>
+      <Routes>
+        <Route exact path='/' element={<Users />} />
+        <Route exact path='/tareas' element={<Tareas />} />
+      </Routes>
     </div>
-  );
-};
+  </BrowserRouter>
+);
 
 export default App;

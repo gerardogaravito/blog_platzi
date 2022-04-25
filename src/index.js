@@ -1,14 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './components/App';
-// import App from './components/Manual';
-// import App from './components/Manual2';
-import App from './components/Manual3';
+import App from './components/App';
+
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
+
+import reducers from './reducers';
+
+const store = createStore(
+  reducers, //Todos los reducers, Object
+  {}, //Estado inicial
+  applyMiddleware(reduxThunk)
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App name='Gerardo' />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
