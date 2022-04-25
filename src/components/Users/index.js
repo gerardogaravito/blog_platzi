@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
+import { connect } from 'react-redux';
+import * as usuariosActions from '../../actions/usuariosActions';
 
+const Users = (props) => {
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get('https://jsonplaceholder.typicode.com/users');
-      const usersMock = await res.data;
-      setUsers(usersMock);
-    };
-
-    fetchData();
+    props.traerTodos();
   }, []);
 
   const ponerFilas = () =>
-    users.map((user) => (
+    props.usuarios.map((user) => (
       <tr key={user.id}>
         <td>{user.name}</td>
         <td>{user.email}</td>
@@ -24,7 +18,7 @@ const Users = () => {
     ));
 
   return (
-    <div className='margen'>
+    <div>
       <table className='tabla'>
         <thead>
           <tr>
@@ -39,4 +33,8 @@ const Users = () => {
   );
 };
 
-export default Users;
+const mapStateToProps = (reducers) => {
+  return reducers.usuariosReducer;
+};
+
+export default connect(mapStateToProps, usuariosActions)(Users);
